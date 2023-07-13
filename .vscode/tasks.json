@@ -1,0 +1,95 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "echo",
+            "type": "shell",
+            "command": "echo $FOO",
+            "problemMatcher": []
+        },
+        {
+            "label": "gRPC plugins: CMake configure",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--install-prefix",
+                "${workspaceFolder}/build/cmake/external/grpc/out",
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DgRPC_BUILD_TESTS=OFF",
+                "-B${workspaceFolder}/build/cmake/external/grpc",
+                "-S${workspaceFolder}/build/external/grpc"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build/external/grpc"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "gRPC plugins: CMake build",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build/cmake/external/grpc",
+                "--parallel",
+                "2",
+                "--config",
+                "Release"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build/external/grpc"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "dependsOn": [
+                "gRPC plugins: CMake configure"
+            ]
+        },
+        {
+            "label": "gRPC plugins: Clean",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-E",
+                "rm",
+                "-rf",
+                "${workspaceFolder}/build/cmake/external/grpc"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build/external/grpc"
+            },
+            "problemMatcher": []
+        },
+        {
+            // The version of gRPC has to match the version included in the used PLCnext SDK.
+            // Check the file usr/lib/cmake/grpc/gRPCConfigVersion.cmake included in the
+            // PLCnext SDK target sysroot folder for version information.
+            "label": "Fetch external content: gRPC",
+            "type": "shell",
+            "command": "git",
+            "args": [
+                "clone",
+                "--recurse-submodules",
+                "-b",
+                "${input:grpc_version_tag}",
+                "--depth",
+                "1",
+                "--shallow-submodules",
+                "https://github.com/grpc/grpc",
+                "${workspaceFolder}/build/external/grpc"
+            ],
+            "problemMatcher": [],
+        }
+    ],
+    "inputs": [
+        {
+            "id": "grpc_version_tag",
+            "description": "gRPC version tag:",
+            "default": "v1.45.2", // This is ok for PLCnext firmware 2023.0
+            "type": "promptString"
+        },
+    ]
+}

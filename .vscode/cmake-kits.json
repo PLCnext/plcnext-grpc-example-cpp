@@ -1,0 +1,32 @@
+[
+  {
+    "name": "axcf2152,22.6.0.43",
+    "toolchainFile": "/home/phoenix/pxc/sdk/axcf2152_2022.6/toolchain.cmake",
+    "preferredGenerator": {"name": "Unix Makefiles"},
+    "cmakeSettings": {
+      "ARP_TOOLCHAIN_ROOT": "/home/phoenix/pxc/sdk/axcf2152_2022.6",
+      "ARP_DEVICE": "AXCF2152",
+      "ARP_DEVICE_VERSION": "2022.6.0 (22.6.0.43)",
+      "CMAKE_INSTALL_PREFIX": "/usr/local",
+      "CMAKE_STAGING_PREFIX": "${workspaceFolder}/build/cmake/${buildKit}/${buildType}/out/",
+      "CMAKE_PROGRAM_PATH": [
+        "/home/phoenix/pxc/sdk/axcf2152_2022.6/sysroots/x86_64-pokysdk-linux/usr/bin",
+        "${workspaceFolder}/build/cmake/external/grpc"]
+    }
+  },
+  {
+    "name": "axcf3152,23.0.2.56",
+    "toolchainFile": "/home/phoenix/pxc/sdk/axcf3152_2023.0.2/toolchain.cmake",
+    "preferredGenerator": {"name": "Unix Makefiles"},
+    "cmakeSettings": {
+      "ARP_TOOLCHAIN_ROOT": "/home/phoenix/pxc/sdk/axcf3152_2023.0.2",
+      "ARP_DEVICE": "AXCF3152",
+      "ARP_DEVICE_VERSION": "2023.0.2 LTS (23.0.2.56)",
+      "CMAKE_INSTALL_PREFIX": "/usr/local",
+      "CMAKE_STAGING_PREFIX": "${workspaceFolder}/build/cmake/${buildKit}/${buildType}/out/",
+      "CMAKE_PROGRAM_PATH": [
+        "/home/phoenix/pxc/sdk/axcf3152_2023.0.2/sysroots/x86_64-pokysdk-linux/usr/bin",
+        "${workspaceFolder}/build/cmake/external/grpc"]
+    }
+  }
+]

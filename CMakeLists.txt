@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.13)
+project(plcnext-grpc-example C CXX)
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS src/*.cpp src/*.hpp)
+find_package(Protobuf REQUIRED)
+find_package(gRPC REQUIRED)
+find_package(PlcnextGrpc REQUIRED)
+add_executable(plcnext-grpc-example ${sources})
+target_link_libraries(plcnext-grpc-example
+    PRIVATE protobuf::libprotobuf gRPC::grpc++ PlcnextGrpc::PlcnextGrpc)
+install(TARGETS plcnext-grpc-example)
