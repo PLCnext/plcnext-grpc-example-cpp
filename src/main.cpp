@@ -11,10 +11,12 @@
 #include <iostream>
 #include <memory>
 #include <chrono>
+#include <thread>
 
 #include <grpcpp/grpcpp.h>
 #include "Plc/Gds/IDataAccessService.grpc.pb.h"
 #include "Device/Interface/IDeviceInfoService.grpc.pb.h"
+#include "ISubscriptionExample.hpp"
 
 namespace example
 {
@@ -186,8 +188,11 @@ int main(int argc, char *argv[])
 
     auto dataAccessService = Arp::Plc::Gds::Services::Grpc::IDataAccessService();
     auto deviceInfoService = Arp::Device::Interface::Services::Grpc::IDeviceInfoService();
+    auto subscriptionService = Arp::Plc::Gds::Services::Grpc::ISubscriptionService();
+
     auto dataAccessStub = dataAccessService.NewStub(channel);
     auto deviceInfoStub = deviceInfoService.NewStub(channel);
+    auto subscriptionStub = subscriptionService.NewStub(channel);
 
     example::IDeviceInfoService_GetItems(deviceInfoStub);
     example::IDataAccessService_Read(dataAccessStub, portname);
@@ -195,6 +200,10 @@ int main(int argc, char *argv[])
     example::IDataAccessService_ReadSingle(dataAccessStub, portname);
     example::IDataAccessService_Write(dataAccessStub, 0, portname);
     example::IDataAccessService_ReadSingle(dataAccessStub, portname);
+
+    auto subscription = example::ISubscriptionServiceExample(std::move(subscriptionStub), portname);
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    subscription.readRecords();
 
     return EXIT_SUCCESS;
 }
