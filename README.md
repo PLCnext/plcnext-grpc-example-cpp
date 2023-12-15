@@ -2,7 +2,7 @@
 
 This project shows how to use the PLCnext gRPC Service in a C++ application.
 The PLCnext gRPC service description files are compiled and then used in a standalone C++ example application.
-For more information about gRPC in PLCnext Technology see the [Using gRPC communication](https://www.plcnext.help/te/Service_Components/gRPC_Introduction.htm) topic in the [PLCnext Info Center](https://www.plcnext.help).
+For more information about gRPC in PLCnext Technology see the [gRPC communication](https://www.plcnext.help/te/Communication_interfaces/gRPC_Introduction.htm) topic in the [PLCnext Info Center](https://www.plcnext.help).
 
 This example was tested with the following PLCnext controllers:
 
